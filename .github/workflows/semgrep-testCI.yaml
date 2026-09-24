@@ -39,39 +39,19 @@ jobs:
     - name: Run Security Audit
       run: npm audit --audit-level=high
 
-# # Adding SAST - Semgrep
-# # Instead of fighting with outdated action wrappers, the cleanest and most professional DevSecOps solution is to install the latest Semgrep CLI directly onto the runner and execute it yourself.
-#   semgrep:
-#     name: Semgrep SAST Code Scan 
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Checkout repository
-#       uses: actions/checkout@v4
+# Adding SAST - Semgrep
+# Instead of fighting with outdated action wrappers, the cleanest and most professional DevSecOps solution is to install the latest Semgrep CLI directly onto the runner and execute it yourself.
+  semgrep:
+    name: Semgrep SAST Code Scan 
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-#     # Installs the absolute latest version of the Semgrep engine securely
-#     - name: Install latest Semgrep
-#       run: pipx install semgrep
+    # Installs the absolute latest version of the Semgrep engine securely
+    - name: Install latest Semgrep
+      run: pipx install semgrep
 
-#     # Runs the scan and forces an exit code 1 (--error) if vulnerabilities are found
-#     - name: Run Semgrep CLI
-#       run: semgrep scan --config "p/nodejs" --config "p/expressjs" --config "p/owasp-top-ten" --error
-
-
-
-# # Adding SAST - Semgrep
-#   # semgrep:
-#   #   name: Semgrep SAST Code Scan 
-#   #   runs-on: ubuntu-latest
-#   #   steps:
-#   #   - name: Checkout repository
-#   #     uses: actions/checkout@v4
-#   #   - name: Run Semgrep
-#   #     uses: returntocorp/semgrep-action@v1
-#   #     with:
-#   #       config: >-
-#   #         p/nodejs
-#   #         p/expressjs
-#   #         p/owasp-top-ten  
-#   #         p/secrets
-#   #         p/jwt
-#   #         p/javascript
+    # Runs the scan and forces an exit code 1 (--error) if vulnerabilities are found
+    - name: Run Semgrep CLI
+      run: semgrep scan --config "p/nodejs" --config "p/expressjs" --config "p/owasp-top-ten" --error
