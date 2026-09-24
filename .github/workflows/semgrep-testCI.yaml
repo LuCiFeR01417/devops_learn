@@ -1,0 +1,77 @@
+name: Node.js SCA Check on CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # This tells all 'run' commands to execute inside the backend folder by default
+    defaults:
+      run:
+        working-directory: ./backend
+
+    strategy:
+      matrix:
+        node-version: [24.x]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        # Explicitly points the caching mechanism to the correct lock file location
+        cache-dependency-path: './backend/package-lock.json'
+    
+    - name: Install Dependencies
+      run: npm ci
+
+    # - name: Run Tests
+    #   run: npm test --if-present
+
+    - name: Run Security Audit
+      run: npm audit --audit-level=high
+
+# # Adding SAST - Semgrep
+# # Instead of fighting with outdated action wrappers, the cleanest and most professional DevSecOps solution is to install the latest Semgrep CLI directly onto the runner and execute it yourself.
+#   semgrep:
+#     name: Semgrep SAST Code Scan 
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v4
+
+#     # Installs the absolute latest version of the Semgrep engine securely
+#     - name: Install latest Semgrep
+#       run: pipx install semgrep
+
+#     # Runs the scan and forces an exit code 1 (--error) if vulnerabilities are found
+#     - name: Run Semgrep CLI
+#       run: semgrep scan --config "p/nodejs" --config "p/expressjs" --config "p/owasp-top-ten" --error
+
+
+
+# # Adding SAST - Semgrep
+#   # semgrep:
+#   #   name: Semgrep SAST Code Scan 
+#   #   runs-on: ubuntu-latest
+#   #   steps:
+#   #   - name: Checkout repository
+#   #     uses: actions/checkout@v4
+#   #   - name: Run Semgrep
+#   #     uses: returntocorp/semgrep-action@v1
+#   #     with:
+#   #       config: >-
+#   #         p/nodejs
+#   #         p/expressjs
+#   #         p/owasp-top-ten  
+#   #         p/secrets
+#   #         p/jwt
+#   #         p/javascript
