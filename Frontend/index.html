@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Security Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+<main class="container">
+
+
+    <header>
+
+        <p class="label">
+            SECURITY LAB
+        </p>
+
+        <h1>
+            Security Knowledge Dashboard - 4nkitsingh
+        </h1>
+
+        <p class="subtitle">
+            A simple REST API project using Node.js and Express. - 4nkitsingh
+        </p>
+        
+    </header>
+
+
+
+    <!-- Backend status -->
+
+    <section class="status-card">
+
+        <div>
+
+            <p class="small-title">
+                BACKEND STATUS
+            </p>
+
+            <h2 id="backendStatus">
+                Checking...
+            </h2>
+
+        </div>
+
+        <div
+            id="statusIndicator"
+            class="indicator"
+        >
+            ●
+        </div>
+
+    </section>
+
+
+
+    <!-- Add tip -->
+
+    <section>
+
+        <h2>
+            Add Security Tip
+        </h2>
+
+
+        <form id="tipForm">
+
+            <input
+                id="title"
+                type="text"
+                placeholder="Tip title"
+                required
+            >
+
+
+            <textarea
+                id="description"
+                placeholder="Description"
+                required
+            ></textarea>
+
+
+            <input
+                id="category"
+                type="text"
+                placeholder="Category"
+                required
+            >
+
+
+            <button type="submit">
+                Add Tip
+            </button>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- Tips -->
+
+    <section>
+
+        <div class="section-header">
+
+            <h2>
+                Security Tips
+            </h2>
+
+            <button id="refreshButton">
+                Refresh
+            </button>
+
+        </div>
+
+
+        <div
+            id="tipsContainer"
+            class="tips"
+        >
+
+            <p>
+                Loading security tips...
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <footer>
+
+        <p>
+            Frontend → REST API → Node.js + Express (4nkit)
+        </p>
+
+    </footer>
+
+
+</main>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
